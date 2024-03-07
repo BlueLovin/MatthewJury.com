@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+    - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: deploy-react-app-to-aws
+      uses: aasmal97/deploy-react-app-to-aws@v1.3.0
+      with:
+        aws_region: ${{ secrets.AWS_REGION }}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        cloudfront_distribution_id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} # optional, default is 1
+        bucket_name: ${{ secrets.BUCKET_NAME }}
+        react_app_secrets: ${{ secrets.REACT_APP_SECRETS }} # optional, default is {}
+        node_version: '19'
+        path_to_app: './' # path to your react app
