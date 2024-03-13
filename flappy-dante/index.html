@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./style/style.css" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quantico:wght@700&display=swap");
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H5CYPNFYCS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H5CYPNFYCS");
+    </script>
+
+    <title>Flappy Dante - MatthewJury.com</title>
+  </head>
+
+  <body>
+    <canvas id="flappy-bird"></canvas>
+    <button class="btn-flappy-bird"></button>
+
+    <script src="./JS/main.js" type="module"></script>
+  </body>
+</html>
