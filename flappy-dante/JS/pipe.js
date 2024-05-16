@@ -34,51 +34,51 @@ export default class Pipe {
       },
     ];
 
-    this.btnRestart = document.querySelector(".btn-flappy-bird");
+    this.btnRestart = document.querySelector(".btn-flappy-dante");
 
-    this.birdCollisionPositionY = 485;
+    this.danteCollisionPositionY = 485;
   }
 
-  didCollide(bird, pipe) {
+  didCollide(dante, pipe) {
     const scaledForegroundHeight =
       this.canvas.foreground.height * this.canvas.scaleFactor;
 
-    const birdBottomEdge = bird.birdPositionY + bird.birdHeight;
+    const danteBottomEdge = dante.dantePositionY + dante.danteHeight;
 
     const playableAreaHeight =
       (this.canvas.element.height - scaledForegroundHeight) /
       this.canvas.scaleFactor;
 
-    const hitGround = birdBottomEdge >= playableAreaHeight;
+    const hitGround = danteBottomEdge >= playableAreaHeight;
 
-    const birdHitsPipeHorizontally =
-      bird.birdPositionX + bird.birdWidth * this.canvas.scaleFactor >= pipe.x &&
-      bird.birdPositionX <= pipe.x + this.pipeUp.width;
-    const birdHitsTopPipeVertically =
-      bird.birdPositionY <= pipe.y - 5 + this.pipeUp.height - 200;
-    const birdHitsBottomPipeVertically =
-      bird.birdPositionY + bird.birdHeight >=
+    const danteHitsPipeHorizontally =
+      dante.dantePositionX + dante.danteWidth * this.canvas.scaleFactor >=
+        pipe.x && dante.dantePositionX <= pipe.x + this.pipeUp.width;
+    const danteHitsTopPipeVertically =
+      dante.dantePositionY <= pipe.y - 5 + this.pipeUp.height - 200;
+    const danteHitsBottomPipeVertically =
+      dante.dantePositionY + dante.danteHeight >=
       pipe.y + this.pipeUp.height + this.gap - 200;
     return (
-      (birdHitsPipeHorizontally &&
-        (birdHitsTopPipeVertically || birdHitsBottomPipeVertically)) ||
+      (danteHitsPipeHorizontally &&
+        (danteHitsTopPipeVertically || danteHitsBottomPipeVertically)) ||
       hitGround
     );
   }
 
-  doGameOver(gameLoop, bird, score, windowGameOver, medal) {
+  doGameOver(gameLoop, dante, score, windowGameOver, medal) {
     gameLoop.cancelAnimation();
 
     document.addEventListener("click", () => {
-      bird.flyBird.pause();
+      dante.flyDante.pause();
     });
 
     document.addEventListener("touchstart", () => {
-      bird.flyBird.pause();
+      dante.flyDante.pause();
     });
 
-    bird.birdPositionY = this.birdCollisionPositionY;
-    bird.dieBird.play();
+    dante.dantePositionY = this.danteCollisionPositionY;
+    dante.dieDante.play();
 
     score.bestScoreRecord();
     windowGameOver.draw(score._score, score._bestScore, medal);
@@ -94,7 +94,7 @@ export default class Pipe {
     });
   }
 
-  update(bird, gameLoop, windowGameOver, score, medal) {
+  update(dante, gameLoop, windowGameOver, score, medal) {
     this.pipes.forEach((pipe) => {
       pipe.x -= this.speed;
       if (pipe.x < this.spaceBetweenPipe && !pipe.newPipeAdded) {
@@ -111,16 +111,16 @@ export default class Pipe {
         this.pipes.shift();
       }
 
-      if (pipe.x < bird.birdPositionX && !pipe.hasBeenScored) {
+      if (pipe.x < dante.dantePositionX && !pipe.hasBeenScored) {
         score.increaseScore();
         score.audioScore.play();
         pipe.hasBeenScored = true;
       }
 
-      const didCollide = this.didCollide(bird, pipe);
+      const didCollide = this.didCollide(dante, pipe);
 
       if (didCollide) {
-        this.doGameOver(gameLoop, bird, score, windowGameOver, medal);
+        this.doGameOver(gameLoop, dante, score, windowGameOver, medal);
       }
     });
   }

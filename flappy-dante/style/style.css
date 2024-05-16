@@ -10,7 +10,7 @@ body {
     align-items: center;
 }
 
-.btn-flappy-bird {
+.btn-flappy-dante {
     display: none;
     padding: 20px 60px;
     background: url('../Images/btnStartGame.png') no-repeat center / cover;
@@ -26,10 +26,10 @@ body {
     position: absolute;
 }
 
-.btn-flappy-bird:active {
+.btn-flappy-dante:active {
     transform: translateY(5%);
 }
 
-.btn-flappy-bird.active {
+.btn-flappy-dante.active {
     display: inline-block
 }

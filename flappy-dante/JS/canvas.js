@@ -2,7 +2,7 @@ import Config from "./config.js";
 
 export default class Canvas {
   constructor() {
-    this.element = document.getElementById("flappy-bird");
+    this.element = document.getElementById("flappy-dante");
     this.context = this.element.getContext("2d");
 
     this.element.width = window.innerWidth;

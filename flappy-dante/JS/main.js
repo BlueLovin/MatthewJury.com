@@ -1,7 +1,7 @@
 import Canvas from "./canvas.js";
 import GameLoop from "./gameLoop.js";
 import Pipe from "./pipe.js";
-import Bird from "./bird.js";
+import Dante from "./dante.js";
 import Score from "./score.js";
 import WindowGameOver from "./windowGameOver.js";
 import Medal from "./medal.js";
@@ -12,7 +12,7 @@ class Game {
   constructor() {
     this.canvas = new Canvas();
     this.pipe = new Pipe();
-    this.bird = new Bird();
+    this.dante = new Dante();
     this.score = new Score();
     this.windowGameOver = new WindowGameOver();
     this.medal = new Medal(this.score);
@@ -40,20 +40,20 @@ class Game {
   update() {
     if (this.config.gamePlaying) {
       this.pipe.update(
-        this.bird,
+        this.dante,
         this.gameLoop,
         this.windowGameOver,
         this.score,
         this.medal
       );
-      this.bird.update();
+      this.dante.update();
     }
   }
 
   draw() {
     this.canvas.draw();
     this.pipe.draw();
-    this.bird.draw();
+    this.dante.draw();
     if (this.config.gamePlaying) this.score.draw();
     if (!this.config.gamePlaying) this.windowGameStart.draw();
   }

@@ -1,31 +1,31 @@
 import Canvas from "./canvas.js";
 import Config from "./config.js";
 
-export default class Bird {
+export default class dante {
   constructor() {
     this.canvas = new Canvas();
     this.config = new Config();
 
-    this.imageBird = new Image();
-    this.imageBird.src = "Images/bird.png";
+    this.imageDante = new Image();
+    this.imageDante.src = "Images/dante.png";
 
-    this.flyBird = new Audio();
-    this.flyBird.src = "audio/fly.wav";
+    this.flyDante = new Audio();
+    this.flyDante.src = "audio/fly.wav";
 
-    this.dieBird = new Audio();
-    this.dieBird.src = "audio/die.wav";
+    this.dieDante = new Audio();
+    this.dieDante.src = "audio/die.wav";
 
-    this.birdWidth = 35;
-    this.birdHeight = 25;
-    this.birdJump = 1;
+    this.danteWidth = 35;
+    this.danteHeight = 25;
+    this.danteJump = 1;
 
-    this.birdX = 0;
-    this.birdPositionX = this.canvas.element.width / 2 - this.birdWidth / 1.5;
+    this.danteX = 0;
+    this.dantePositionX = this.canvas.element.width / 2 - this.danteWidth / 1.5;
 
-    this.birdY;
-    this.birdPositionY = 239;
+    this.danteY;
+    this.dantePositionY = 239;
 
-    this.targetBirdPositionY = this.canvas.height; // Set the initial target position to be the bottom of the screen
+    this.targetDantePositionY = this.canvas.height; // Set the initial target position to be the bottom of the screen
     this.lerpRate = 0.3;
     this.velocityY = 0;
     this.lift = -8; // The force of the jump (negative because it goes up)
@@ -42,7 +42,7 @@ export default class Bird {
   update() {
     // Apply gravity
     this.velocityY += this.config.gravity;
-    this.birdPositionY += this.velocityY;
+    this.dantePositionY += this.velocityY;
 
     // Limit speed
     if (this.velocityY > this.maxDownwardsSpeed) {
@@ -51,38 +51,39 @@ export default class Bird {
       this.velocityY = this.maxUpwardsSpeed;
     }
 
-    // Prevent bird from going off the top of the screen
-    if (this.birdPositionY < 0) {
-      this.birdPositionY = 0;
+    // Prevent dante from going off the top of the screen
+    if (this.dantePositionY < 0) {
+      this.dantePositionY = 0;
       this.velocityY = 0;
     }
   }
 
   draw() {
     this.config.index += 0.3;
-    this.birdY = Math.floor((this.config.index % 9) / 3) * (this.birdWidth - 9);
+    this.danteY =
+      Math.floor((this.config.index % 9) / 3) * (this.danteWidth - 9);
 
-    let scaledBirdWidth = this.birdWidth * this.canvas.scaleFactor;
-    let scaledBirdHeight = this.birdHeight * this.canvas.scaleFactor;
-    let scaledPositionX = this.birdPositionX;
-    let scaledPositionY = this.birdPositionY * this.canvas.scaleFactor;
+    let scaledDanteWidth = this.danteWidth * this.canvas.scaleFactor;
+    let scaledDanteHeight = this.danteHeight * this.canvas.scaleFactor;
+    let scaledPositionX = this.dantePositionX;
+    let scaledPositionY = this.dantePositionY * this.canvas.scaleFactor;
 
     this.canvas.context.drawImage(
-      this.imageBird,
-      this.birdX,
-      this.birdY,
-      this.birdWidth, // Original sprite crop width (if using sprite sheet)
-      this.birdHeight, // Original sprite crop height
+      this.imageDante,
+      this.danteX,
+      this.danteY,
+      this.danteWidth,
+      this.danteHeight,
       scaledPositionX,
       scaledPositionY,
-      scaledBirdWidth,
-      scaledBirdHeight
+      scaledDanteWidth,
+      scaledDanteHeight
     );
   }
 
   jump() {
     this.velocityY = this.lift;
-    this.flyBird.play();
+    this.flyDante.play();
   }
 
   control() {
